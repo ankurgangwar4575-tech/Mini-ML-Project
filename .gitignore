@@ -1,5 +1,7 @@
+.ipynb_checkpoints/
+anaconda_projects/
 __pycache__/
 *.pyc
-.ipynb_checkpoints/
-venv/
 .env
+venv/
+.streamlit/secrets.toml
