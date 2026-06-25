@@ -99,10 +99,7 @@ if st.button("Predict Loan Approval", use_container_width=True):
     final_input = final_input.reindex(columns=feature_columns, fill_value=0)
     final_input_scaled = scaler.transform(final_input)
 
-    model_choice = st.selectbox(
-    "Choose a model for prediction:",
-    ["Decision Tree", "Logistic Regression", "Gaussian Naive Bayes", "K-Nearest Neighbors"]
-)
+   
     model_map = {
         "Decision Tree": tree_model,
         "Logistic Regression": log_model,
