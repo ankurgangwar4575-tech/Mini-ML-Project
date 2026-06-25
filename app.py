@@ -101,15 +101,15 @@ if st.button("Predict Loan Approval", use_container_width=True):
 
    
     model_map = {
-        "Decision Tree": tree_model,
-        "Logistic Regression": log_model,
-        "Gaussian Naive Bayes": gnb_model,
-        "K-Nearest Neighbors": knn_model
+       "Logistic Regression": (log_model, final_input_scaled),
+    "Gaussian Naive Bayes": (gnb_model, final_input_scaled),
+    "K-Nearest Neighbors": (knn_model, final_input_scaled),
+    "Decision Tree": (tree_model, final_input) 
     }
-    selected_model = model_map[model_choice]
+    selected_model, model_input = model_map[model_choice]
 
-    prediction = selected_model.predict(final_input_scaled)[0]
-    probability = selected_model.predict_proba(final_input_scaled)[0]
+    prediction = selected_model.predict(model_input)[0]
+    probability = selected_model.predict_proba(model_input)[0]
     predicted_label = le_target.inverse_transform([prediction])[0]
 
     st.divider()
@@ -123,4 +123,4 @@ if st.button("Predict Loan Approval", use_container_width=True):
         st.write(f"Yes (Approved) probability: {probability[1]*100:.2f}%")
 
 st.divider()
-st.caption("Built with Streamlit | Models: Logistic Regression, GaussianNB, KNN")
+st.caption("Built with Streamlit | Models: Decision Tree, Logistic Regression, GaussianNB, KNN")
