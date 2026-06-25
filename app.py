@@ -8,6 +8,7 @@ st.set_page_config(page_title="CreditWise Loan Approval", page_icon="💰", layo
 
 @st.cache_resource
 def load_artifacts():
+    tree_model = joblib.load('models/tree_model.pkl') 
     le_education = joblib.load('models/le_education.pkl')
     le_target = joblib.load('models/le_target.pkl')
     ohe = joblib.load('models/ohe.pkl')
@@ -19,9 +20,9 @@ def load_artifacts():
         ohe_input_cols = json.load(f)
     with open('models/feature_columns.json', 'r') as f:
         feature_columns = json.load(f)
-    return le_education, le_target, ohe, scaler, log_model, gnb_model, knn_model, ohe_input_cols, feature_columns
+    return le_education, le_target, ohe, scaler,tree_model, log_model, gnb_model, knn_model, ohe_input_cols, feature_columns
 
-le_education, le_target, ohe, scaler, log_model, gnb_model, knn_model, ohe_input_cols, feature_columns = load_artifacts()
+le_education, le_target, ohe, scaler,tree_model, log_model, gnb_model, knn_model, ohe_input_cols, feature_columns = load_artifacts()
 
 st.title("CreditWise — Loan Approval Predictor")
 st.markdown("Fill in the applicant details below to predict loan approval status.")
@@ -29,7 +30,7 @@ st.divider()
 
 model_choice = st.selectbox(
     "Choose a model for prediction:",
-    ["Logistic Regression", "Gaussian Naive Bayes", "K-Nearest Neighbors"]
+    ["Decision Tree","Logistic Regression", "Gaussian Naive Bayes", "K-Nearest Neighbors"]
 )
 st.divider()
 
@@ -98,7 +99,12 @@ if st.button("Predict Loan Approval", use_container_width=True):
     final_input = final_input.reindex(columns=feature_columns, fill_value=0)
     final_input_scaled = scaler.transform(final_input)
 
+    model_choice = st.selectbox(
+    "Choose a model for prediction:",
+    ["Decision Tree", "Logistic Regression", "Gaussian Naive Bayes", "K-Nearest Neighbors"]
+)
     model_map = {
+        "Decision Tree": tree_model,
         "Logistic Regression": log_model,
         "Gaussian Naive Bayes": gnb_model,
         "K-Nearest Neighbors": knn_model

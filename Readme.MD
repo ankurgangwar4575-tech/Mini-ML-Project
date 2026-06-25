@@ -1,6 +1,6 @@
 # CreditWise - Loan Approval Prediction System
 
-A machine learning web app that predicts whether a loan application will be approved or rejected, based on applicant details such as income, credit score, employment status, and property area. Three classification algorithms were trained and compared, with the pipeline deployed using Streamlit.
+A machine learning web app that predicts whether a loan application will be approved or rejected, based on applicant details such as income, credit score, employment status, and property area. Four classification algorithms were trained and compared, with the pipeline deployed using Streamlit.
 
 Live app: https://loan-classifier.streamlit.app/
 
@@ -20,19 +20,20 @@ Three derived features were added: log-transformed applicant income (`np.log1p`)
 
 ## Models Used
 
-Logistic Regression, Gaussian Naive Bayes, and K-Nearest Neighbors were trained on the same scaled feature set (StandardScaler) and evaluated on a held-out test set.
+Logistic Regression, Gaussian Naive Bayes, K-Nearest Neighbors, and Decision Tree were trained on the same scaled feature set (StandardScaler) and evaluated on a held-out test set.
 
 ### Model Comparison
 
 | Model | Precision | Recall | F1-Score | Accuracy |
 |---|---|---|---|---|
+| Decision Tree | 0.92 | 0.92 | 0.92 | 0.92 |
 | Logistic Regression | 0.87 | 0.87 | 0.87 | 0.87 |
 | Gaussian Naive Bayes | 0.86 | 0.86 | 0.86 | 0.86 |
 | K-Nearest Neighbors | 0.74 | 0.75 | 0.74 | 0.75 |
 
 (weighted averages across both classes)
 
-Logistic Regression performed best overall and is the default model in the app. It also had the highest recall on the approved class (0.80 vs 0.74 for Naive Bayes and 0.46 for KNN), which matters here since missing a genuinely approvable applicant is a more costly mistake than a false alarm. KNN lagged behind both other models, likely due to the imbalanced class distribution affecting distance-based voting.
+Decision Tree performed best overall and is the default model in the app, with 0.92 accuracy and 0.92 recall on the approved class — well ahead of the other three. This matters here since missing a genuinely approvable applicant is a more costly mistake than a false alarm. Logistic Regression and Naive Bayes were close to each other in the high-80s, while KNN lagged behind all three, likely due to the imbalanced class distribution affecting distance-based voting.
 
 ## Tech Stack
 
@@ -54,6 +55,7 @@ credit-wise-loan-approval/
 │   ├── logistic_model.pkl
 │   ├── gaussian_nb_model.pkl
 │   ├── knn_model.pkl
+│   ├── tree_model.pkl
 │   ├── ohe_input_cols.json
 │   └── feature_columns.json
 ├── app.py
@@ -83,12 +85,12 @@ The notebook (`credit_wise.ipynb`) contains the full pipeline: cleaning, EDA, en
 
 - Address class imbalance (current dataset is roughly 70/30 rejected/approved) using SMOTE or class-weighted training
 - Add Random Forest or XGBoost for comparison
-- Hyperparameter tuning with GridSearchCV
+- Tune Decision Tree depth and post-pruning (ccp_alpha) to check for overfitting on unseen data
 - Add SHAP plots for model explainability
 
 ## Author
 
 Ankur Gangwar
-- LinkedIn: https://www.linkedin.com/in/ankur-gangwar/
-- GitHub: https://github.com/ankurgangwar4575-tech
-- Project repo: https://github.com/ankurgangwar4575-tech/Mini-ML-Project
+LinkedIn: https://www.linkedin.com/in/ankur-gangwar/
+GitHub: https://github.com/ankurgangwar4575-tech
+Project repo: https://github.com/ankurgangwar4575-tech/Mini-ML-Project
