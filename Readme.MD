@@ -38,55 +38,13 @@ Decision Tree performed best overall and is the default model in the app, with 0
 ## Tech Stack
 
 Python, Pandas, NumPy, Scikit-learn, Streamlit, Joblib
-
-## Project Structure
-
-```
-credit-wise-loan-approval/
-├── data/
-│   └── loan_approval_data.csv
-├── notebooks/
-│   └── credit_wise.ipynb
-├── models/
-│   ├── le_education.pkl
-│   ├── le_target.pkl
-│   ├── ohe.pkl
-│   ├── scaler.pkl
-│   ├── logistic_model.pkl
-│   ├── gaussian_nb_model.pkl
-│   ├── knn_model.pkl
-│   ├── tree_model.pkl
-│   ├── ohe_input_cols.json
-│   └── feature_columns.json
-├── app.py
-├── requirements.txt
-├── .gitignore
-└── README.md
-```
-
-## How to Run Locally
-
-```bash
-git clone https://github.com/ankurgangwar4575-tech/Mini-ML-Project.git
-cd Mini-ML-Project
-pip install -r requirements.txt
-streamlit run app.py
-```
-
-App opens at `http://localhost:8501`.
-
+`
 ## How It Works
 
 The user fills in applicant details through the form. Categorical inputs are transformed using the same Label Encoder and One-Hot Encoder fitted during training, and engineered features are recomputed from raw inputs. The final feature vector is reordered to match the training column order, scaled using the saved StandardScaler, and passed to the selected model, which returns a prediction and confidence score.
 
 The notebook (`credit_wise.ipynb`) contains the full pipeline: cleaning, EDA, encoding, feature engineering, training, and evaluation. The trained models, encoders, scaler, and column order are saved with joblib at the end of the notebook, and the app loads these directly instead of retraining on every run.
 
-## Future Improvements
-
-- Address class imbalance (current dataset is roughly 70/30 rejected/approved) using SMOTE or class-weighted training
-- Add Random Forest or XGBoost for comparison
-- Tune Decision Tree depth and post-pruning (ccp_alpha) to check for overfitting on unseen data
-- Add SHAP plots for model explainability
 
 ## Author
 
