@@ -91,6 +91,6 @@ The notebook (`credit_wise.ipynb`) contains the full pipeline: cleaning, EDA, en
 ## Author
 
 Ankur Gangwar
-LinkedIn: https://www.linkedin.com/in/ankur-gangwar/
-GitHub: https://github.com/ankurgangwar4575-tech
-Project repo: https://github.com/ankurgangwar4575-tech/Mini-ML-Project
+- LinkedIn: https://www.linkedin.com/in/ankur-gangwar/
+- GitHub: https://github.com/ankurgangwar4575-tech
+- Project repo: https://github.com/ankurgangwar4575-tech/Mini-ML-Project
