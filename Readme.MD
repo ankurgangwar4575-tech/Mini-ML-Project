@@ -38,7 +38,7 @@ Decision Tree performed best overall and is the default model in the app, with 0
 ## Tech Stack
 
 Python, Pandas, NumPy, Scikit-learn, Streamlit, Joblib
-`
+
 ## How It Works
 
 The user fills in applicant details through the form. Categorical inputs are transformed using the same Label Encoder and One-Hot Encoder fitted during training, and engineered features are recomputed from raw inputs. The final feature vector is reordered to match the training column order, scaled using the saved StandardScaler, and passed to the selected model, which returns a prediction and confidence score.
@@ -46,7 +46,7 @@ The user fills in applicant details through the form. Categorical inputs are tra
 The notebook (`credit_wise.ipynb`) contains the full pipeline: cleaning, EDA, encoding, feature engineering, training, and evaluation. The trained models, encoders, scaler, and column order are saved with joblib at the end of the notebook, and the app loads these directly instead of retraining on every run.
 
 
-## Author
+# Author
 
 Ankur Gangwar
 - LinkedIn: https://www.linkedin.com/in/ankur-gangwar/
